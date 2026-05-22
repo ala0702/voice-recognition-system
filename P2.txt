@@ -1,0 +1,79 @@
+Biometria
+Projekt 2
+Rozpoznawanie Mówcy
+Celem projektu grupowego jest wykorzystanie systemu autoryzacji użytkownika na
+podstawie głosu. W ramach projektu możesz posiłkować się np. toolkitami takimi jak
+SpeechBrain, WeSpeaker, lub 3D Speaker Toolkit. Alternatywnie wykorzystaj tylko
+elementy systemów weryfikacji (np. embeddingi lub funkcję celu) w połączeniu z do
+wolną architekturą klasyfikacyjną.
+Wcelu wykonania listy możesz użyć podzbiorów wybranych z publicznych zbio
+rów np. VoxBlink, VoxCeleb1, VoxCeleb2 lub CNCeleb11. Możesz też wykorzystać
+youtube-dl w celu scrapowania materiałów z wypowiedziami i wyodrębnienia nagra
+nia głosu.
+Dozwolone jest dowolne prefiltrowanie próbek danych, jak również dobór własnego
+ekstraktora cech sygnału lub embeddingu użytkownika. Możliwe jest wykorzystanie
+gotowych checkpointów modelu, trenowanie modelu od początku lub finetunowanie
+modelu na nowym (np. augmentowanym) zbiorze danych. Profil użytkownika może
+być tworzony na podstawie dowolnej liczby próbek, natomiast czas pobierania danych
+podczas rejestracji nie powinien przekraczać 20 minut i być odpowiednio krótszy dla
+uwierzytelniania na podstawie krótkich lub ustalonych fraz (jak fixed text speaker re
+cognition).
+Podstawowym celem projektu jest implementacja, wdrożenie i przetestowanie sys
+temu uwierzytelniania. System powinien pozwalać na dodawanie użytkowników do
+systemu, a następnie weryfikację lub identyfikację nowych próbek. W przypadku we
+ryfikacji, wejściem do systemu jest identyfikator użytkownika oraz próbka sygnału, w
+przypadku identyfikacji jedynym wejściem jest próbka sygnału. Zadbaj, by wykorzy
+stywane w procesie uwierzytelniania próbki danych nie były wcześniej widziane przez
+model na żadnym etapie. W systemie powinny być wdrożone profile przynajmniej 100
+osób (w tym wszystkich członków grupy, zadbaj, by długość próbek oraz częstotli
+wość próbkowania były zgodne z oryginalnym zbiorem). Czas uwierzytelniania, w tym
+preprocessingu, nie powinien być uciążliwy dla użytkownika. Maksymalna długość wy
+maganej w celu uwierzytelnienia próbki sygnału nie powinna przekraczać 60 s.
+1Wymaga rejestracji i podpisania licencji.
+1
+Po wdrożeniu systemu, korzystając z nieużywanych dotąd próbek, przeprowadź
+testy, które uwzględniają:
+1. Przetestowanie skuteczności systemu (wyrażonej w omówionych metrykach) na nie
+mniej niż 500 próbkach wdrożonych użytkowników (zbalansuj prawidłowe próby
+uwierzytelnienia i próby podszycia się pod innych użytkowników).
+2. Dla podzbioru przynajmniej 500 próbek wykonaj losowo (z prawdopodobieństwem
+jednostajnym) przemnożenia amplitudy próbki przez wartość ze zbioru {25, 1,
+0.04}, a następnie porównaj skuteczność modelu z wynikami uzyskanymi w zada
+niu 1.
+3. Dla wybranych 200 próbek sygnału zmniejsz częstotliwość próbkowania poprzez
+naiwne pozostawienie co 2., co 5. oraz co 10. wartości (pamiętaj o metadanych).
+Sprawdź, jak subsampling wpływa na wymaganą długość próbki sygnału oraz na
+skuteczność uwierzytelniania. Następnie powtórz eksperyment (downsampling 2x,
+5x i 10x) korzystając ze standardowych metod downsamplingu z interpolacją.
+4. Dla 100 próbek dodaj addytywny szum Gaussowski i przetestuj działanie systemu
+dla kilku poziomów SNR, np. 40 dB, 20 dB oraz 10 dB. Szum należy dobrać
+tak, aby dla każdej próbki uzyskać zadany poziom SNR względem oryginalnego
+sygnału. Następnie zbadaj skuteczność systemu i porównaj wyniki z wynikami
+uzyskanymi w zadaniu 1.
+5. Dla 100 próbek dodaj różne dźwięki tła (np. pochodzące ze zbioru UrbanSound8K
+lub innego zbioru nagrań środowiskowych), a następnie przetestuj działanie sys
+temu dla kilku poziomów SNR, np. 20 dB, 10 dB oraz 0 dB.
+6. Sprawdź, jak stratna kompresja i zastosowany kodek wpływają na skuteczność
+systemu. W tym celu przygotuj warianty skompresowane dla co najmniej 3 usta
+wień dla 3 kodeków np. MP3, AAC, Opus.
+7. Sprawdź, jak reverberacja (echo pomieszczenia) wpływa na skuteczność systemu.
+Wtymcelu możesz wykorzystać np. zbiory odpowiedzi impulsowych pomieszczeń
+(room impulse response), takie jak OpenSLR SLR28.
+Wramach projektu przygotuj raport, w którym zostaną wskazane:
+• dane autorów (imię, nazwisko, nr indeksu, termin laboratorium),
+• opisana metoda uwierzytelniania, ze wskazaniem wszystkich wykorzystanych źró
+deł (np. model bazowy) oraz zaznaczonymi elementami autorskimi,
+2
+• przedstawiony zbiór danych (oraz podział na odpowiednie podzbiory i metoda
+subsamplingu)– istotne cechy to liczba osób, liczba próbek dla każdej z osób oraz
+czas trwania próbek na poszczególnych etapach życia systemu,
+• opisana procedura wdrożenia oraz uwierzytelniania,
+• opis procedury testowania, prac wykonanych w celu korekty wyników dla zabu
+rzonych próbek, wyniki, porównanie z wynikami raportowanymi przez autorów
+modelu bazowego (lub innych zbliżonych funkcjonalnością modeli) oraz wnioski.
+Wyniki powinny być zaprezentowane z użyciem standardowych metryk biome
+trycznych.
+Raport wyślij na adres mailowy prowadzącego laboranta najpóźniej 48 godzin przed
+terminem oddania projektu. Autorzy mają obowiązek zaprezentować działanie systemu
+podczas zajęć laboratoryjnych.
+3
